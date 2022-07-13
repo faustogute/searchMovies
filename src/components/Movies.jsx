@@ -1,6 +1,6 @@
 import MovieCard from './MovieCard'
 
-const Movies = ({ data }) => {
+const Movies = ({ data, error }) => {
   return (
     <section className='py-4'>
       {data.length === 0

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState, useRef, useEffect } from 'react'
+import Loading from './Loading'
 import Movies from './Movies'
 
 const apiKey = 'c108ab96'
@@ -7,6 +8,8 @@ const apiKey = 'c108ab96'
 function App () {
   const searchRef = useRef(null)
   const [movies, setMovies] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   const getMovies = async (query = 'batman') => {
     return await axios.get(
@@ -17,6 +20,7 @@ function App () {
   const getData = async () => {
     const { data } = await getMovies()
     setMovies(data.Search)
+    setLoading(false)
   }
   useEffect(() => {
     getData()
@@ -25,7 +29,12 @@ function App () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { data } = await getMovies(searchRef.current.value)
-    setMovies(data.Search)
+    if (data.Response === 'False') {
+      setError(data.Error)
+      setMovies([])
+    } else {
+      setMovies(data.Search)
+    }
   }
 
   return (
@@ -43,7 +52,7 @@ function App () {
             <button className='btn btn-primary'>Buscar</button>
           </div>
         </form>
-        <Movies data={movies} />
+        {loading ? <Loading /> : <Movies data={movies} />}
       </section>
     </div>
   )
