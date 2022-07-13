@@ -14,15 +14,13 @@ function App () {
     )
   }
 
+  const getData = async () => {
+    const { data } = await getMovies()
+    setMovies(data.Search)
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getMovies()
-      setMovies(data.Search)
-    }
-    fetchData()
+    getData()
   }, [])
-
-  console.log(movies)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
