@@ -1,26 +1,19 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 // components
 import Loading from './Loading'
 import Movies from './Movies'
-import getMovies from '../utils/getMovies'
 // hooks
 import useFetcher from '../hooks/useFetcher'
 
 function App () {
   const searchRef = useRef(null)
-  const { data: movies, loading, error } = useFetcher('avengers')
+  const [query, setQuery] = useState('avengers')
+  const { dataState: movies, loading } = useFetcher(query)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const { data } = await getMovies(searchRef.current.value)
-    // if (data.Response === 'False') {
-    //   setError(data.Error)
-    //   setMovies([])
-    // } else {
-    //   setMovies(data.Search)
-    // }
-    const { data } = await getMovies(searchRef.current.value)
-    console.log(data)
+    setQuery(searchRef.current.value)
+    e.target.reset() // form reset
   }
 
   return (

@@ -1,15 +1,12 @@
 import axios from 'axios'
 
 const apiKey = 'c108ab96'
+const baseUrl = `http://omdbapi.com/?apikey=${apiKey}`
 
-const getMovies = (query) => {
-  return axios
-    .get(
-      `
-    http://www.omdbapi.com/?apikey=${apiKey}&s=${query}
-  `
-    )
-    .then((response) => response)
+export const getMovies = async (query) => {
+  return await axios.get(`${baseUrl}&s=${query}`)
 }
 
-export default getMovies
+export const getMovie = async (id) => {
+  return await axios.get(`${baseUrl}&i=${id}`)
+}
