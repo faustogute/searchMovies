@@ -1,5 +1,5 @@
 // librerías
-import { StrictMode } from 'react'
+// import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -8,14 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/index.css'
 
 // componentes
-import App from './components/App'
-import Paths from './Paths'
+// import App from './components/App'
+import MoviePaths from './MoviePaths'
 
 createRoot(document.getElementById('root')).render(
   <>
     {/* <App /> */}
     <BrowserRouter>
-      <Paths />
+      <MoviePaths />
     </BrowserRouter>
   </>
 )
